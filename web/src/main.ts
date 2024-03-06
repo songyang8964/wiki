@@ -1,10 +1,16 @@
+import './assets/main.css'
+
 import {createApp} from 'vue'
-import './style.css'
+import {createPinia} from 'pinia'
+import antd from 'ant-design-vue'
+import 'ant-design-vue/dist/reset.css'
 // @ts-ignore
 import App from './App.vue'
-import 'ant-design-vue/dist/antd.css'
-import antdv from 'ant-design-vue'
-import {createPinia} from 'pinia'
-import {createRouter,createWebHashHistory} from "vue-router";
+import router from './router'
 
-createApp(App).use(antdv).use(createPinia()).mount('#app')
+createApp(App)
+  .use(router)
+  .use(createPinia())
+  .use(antd)
+  .mount('#app')
+
