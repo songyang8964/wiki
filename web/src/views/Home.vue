@@ -1,6 +1,8 @@
 <template>
   <div class="home">
+    <!-- Main layout container -->
     <a-layout>
+      <!-- Sidebar layout for navigation menu -->
       <a-layout-sider width="200" style="background: #fff">
         <a-menu
             v-model:selectedKeys="selectedKeys2"
@@ -8,10 +10,11 @@
             mode="inline"
             style="height: 100%"
         >
+          <!-- First submenu -->
           <a-sub-menu key="sub1">
             <template #title>
               <span>
-                <user-outlined/>
+                <user-outlined />
                 subnav 1
               </span>
             </template>
@@ -20,10 +23,11 @@
             <a-menu-item key="3">option3</a-menu-item>
             <a-menu-item key="4">option4</a-menu-item>
           </a-sub-menu>
+          <!-- Second submenu -->
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                <laptop-outlined/>
+                <laptop-outlined />
                 subnav 2
               </span>
             </template>
@@ -32,10 +36,11 @@
             <a-menu-item key="7">option7</a-menu-item>
             <a-menu-item key="8">option8</a-menu-item>
           </a-sub-menu>
+          <!-- Third submenu -->
           <a-sub-menu key="sub3">
             <template #title>
               <span>
-                <notification-outlined/>
+                <notification-outlined />
                 subnav 1111111111
               </span>
             </template>
@@ -46,43 +51,109 @@
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
+      <!-- Content layout for displaying list items -->
       <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-        <pre>
-          {{ ebooks }}
-        </pre>
+        <!-- Ant Design Vue list component -->
+        <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="ebooks">
+          <!-- Footer slot of the list -->
+          <template #footer>
+            <div>
+              <b>ant design vue</b>
+              footer part
+            </div>
+          </template>
+          <!-- List item rendering template -->
+          <template #renderItem="{ item }">
+            <a-list-item :key="item.title">
+              <!-- Actions slot for list item actions -->
+              <template #actions>
+                <span v-for="{ icon, text } in actions" :key="icon">
+                  <component :is="icon" style="margin-right: 8px" />
+                  {{ text }}
+                </span>
+              </template>
+              <!-- Extra content slot for list item -->
+              <template #extra>
+                <img
+                    width="272"
+                    alt="logo"
+                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                />
+              </template>
+              <!-- Metadata slot for list item meta information -->
+              <a-list-item-meta :description="item.description">
+                <template #title>
+                  <a :href="item.href">{{ item.title }}</a>
+                </template>
+                <template #avatar><a-avatar :src="item.avatar" /></template>
+              </a-list-item-meta>
+              {{ item.content }}
+            </a-list-item>
+          </template>
+        </a-list>
       </a-layout-content>
     </a-layout>
   </div>
 </template>
 
-<script lang="ts" setup>
-import {ref} from 'vue';
-import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons-vue';
-import {defineComponent} from 'vue';
+<script lang="ts">
+import { ref, onMounted } from 'vue';
+import { UserOutlined, LaptopOutlined, NotificationOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
 import axios from 'axios';
 
-
-//后端的电子书列表不断更新的,这里前端需要用响应式的数据(ref)
-// ref对应的赋值是.value
-
-
-export default defineComponent({
+export default {
   name: 'Home',
-  serup() {
-    console.log('setup');
-    const ebooks = ref();
+  setup() {
+    // Define reactive variables
+    const ebooks = ref([]);
+    const selectedKeys2 = ref([]);
+    const openKeys = ref([]);
+
+    // Fetch data from the backend when the component is mounted
     onMounted(() => {
-      console.log('onMounted');
-      axios.get("GET http://localhost:8080/ebook/list?name=Spring").then((response) => {
-        const data = response.data;
-        ebboks.value = data.content;
-        console.log(response);
-      });
+      axios.get('http://localhost:8080/ebook/list?name=Spring')
+          .then((response) => {
+            const data = response.data;
+            if (data && data.content) {
+              // Assign fetched data to ebooks
+              ebooks.value = data.content;
+            } else {
+              // Set default value if no data is found
+              ebooks.value = [];
+            }
+            console.log(response);
+          })
+          .catch((error) => {
+            console.error('Error fetching ebook list:', error);
+          });
     });
+
+    // Define pagination configuration
+    const pagination = {
+      onChange: (page: number) => {
+        console.log(page);
+      },
+      pageSize: 3,
+    };
+
+    // Define actions for list items
+    const actions = [
+      { icon: StarOutlined, text: '156' },
+      { icon: LikeOutlined, text: '156' },
+      { icon: MessageOutlined, text: '2' },
+    ];
+
+    // Return reactive variables and imported icons
     return {
       ebooks,
-    };
-  },
-});
-
+      selectedKeys2,
+      openKeys,
+      pagination,
+      actions,
+      UserOutlined,
+      LaptopOutlined,
+      NotificationOutlined,
+    }
+  }
+};
 </script>
