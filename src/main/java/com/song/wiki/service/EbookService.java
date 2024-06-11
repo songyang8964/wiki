@@ -1,15 +1,19 @@
 package com.song.wiki.service;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.song.wiki.domain.Ebook;
 import com.song.wiki.domain.EbookExample;
 import com.song.wiki.mapper.EbookMapper;
 import com.song.wiki.request.EbookReq;
 import com.song.wiki.response.EbookResp;
 import com.song.wiki.utils.Result;
+
 import javax.annotation.Resource;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +28,9 @@ public class EbookService {
     public List<EbookResp> list(EbookReq req) {
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
-        criteria.andNameLike("%" + req.getName() + "%");
+        if (!ObjectUtils.isEmpty(req.getName())) {
+            criteria.andNameLike("%" + req.getName() + "%");
+        }
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
         List<EbookResp> respList = new ArrayList<>();

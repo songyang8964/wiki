@@ -54,7 +54,7 @@
       <!-- Content layout for displaying list items -->
       <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
         <!-- Ant Design Vue list component -->
-        <a-list item-layout="vertical" size="large" :grid="{gutter:20 , column:3}" :data-source="ebooks">
+        <a-list item-layout="vertical" size="large" :grid="{ gutter: 20, column: 3 }" :data-source="ebooks">
           <!-- Footer slot of the list -->
           <template #footer>
             <div>
@@ -74,11 +74,8 @@
               </template>
               <!-- Extra content slot for list item -->
               <template #extra>
-                <!--                <img-->
-                <!--                    width="272"-->
-                <!--                    alt="logo"-->
-                <!--                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"-->
-                <!--                />-->
+                <!-- Uncomment and add image if needed -->
+                <!-- <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" /> -->
               </template>
               <!-- Metadata slot for list item meta information -->
               <a-list-item-meta :description="item.description">
@@ -120,7 +117,7 @@ export default {
 
     // Fetch data from the backend when the component is mounted
     onMounted(() => {
-      axios.get('http://localhost:8080/ebook/list?name=Spring')
+      axios.get('http://localhost:8080/ebook/list')
           .then((response) => {
             const data = response.data;
             if (data && data.content) {
@@ -166,3 +163,16 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* Custom styles for the Home component, scoped means these styles will only apply to this component */
+.ant-avatar {
+  width: 50px; /* Sets the width of the avatar to 50 pixels */
+  height: 50px; /* Sets the height of the avatar to 50 pixels */
+  line-height: 50px; /* Sets the line height to center the text vertically within the avatar */
+  border-radius: 8%; /* Rounds the corners of the avatar, making it slightly rounded (8% of its width/height) */
+  margin: 5px 0; /* Adds 5 pixels of margin above and below the avatar */
+}
+</style>
+
+```
