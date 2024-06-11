@@ -14,7 +14,7 @@
           <a-sub-menu key="sub1">
             <template #title>
               <span>
-                <user-outlined />
+                <user-outlined/>
                 subnav 1
               </span>
             </template>
@@ -27,7 +27,7 @@
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                <laptop-outlined />
+                <laptop-outlined/>
                 subnav 2
               </span>
             </template>
@@ -40,7 +40,7 @@
           <a-sub-menu key="sub3">
             <template #title>
               <span>
-                <notification-outlined />
+                <notification-outlined/>
                 subnav 1111111111
               </span>
             </template>
@@ -54,7 +54,7 @@
       <!-- Content layout for displaying list items -->
       <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
         <!-- Ant Design Vue list component -->
-        <a-list item-layout="vertical" size="large" :pagination="pagination" :data-source="ebooks">
+        <a-list item-layout="vertical" size="large" :grid="{gutter:20 , column:3}" :data-source="ebooks">
           <!-- Footer slot of the list -->
           <template #footer>
             <div>
@@ -64,28 +64,30 @@
           </template>
           <!-- List item rendering template -->
           <template #renderItem="{ item }">
-            <a-list-item :key="item.title">
+            <a-list-item :key="item.name">
               <!-- Actions slot for list item actions -->
               <template #actions>
                 <span v-for="{ icon, text } in actions" :key="icon">
-                  <component :is="icon" style="margin-right: 8px" />
+                  <component :is="icon" style="margin-right: 8px"/>
                   {{ text }}
                 </span>
               </template>
               <!-- Extra content slot for list item -->
               <template #extra>
-                <img
-                    width="272"
-                    alt="logo"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                />
+                <!--                <img-->
+                <!--                    width="272"-->
+                <!--                    alt="logo"-->
+                <!--                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"-->
+                <!--                />-->
               </template>
               <!-- Metadata slot for list item meta information -->
               <a-list-item-meta :description="item.description">
                 <template #title>
-                  <a :href="item.href">{{ item.title }}</a>
+                  <a :href="item.href">{{ item.name }}</a>
                 </template>
-                <template #avatar><a-avatar :src="item.avatar" /></template>
+                <template #avatar>
+                  <a-avatar :src="item.avatar"/>
+                </template>
               </a-list-item-meta>
               {{ item.content }}
             </a-list-item>
@@ -97,8 +99,15 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from 'vue';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons-vue';
+import {ref, onMounted} from 'vue';
+import {
+  UserOutlined,
+  LaptopOutlined,
+  NotificationOutlined,
+  StarOutlined,
+  LikeOutlined,
+  MessageOutlined
+} from '@ant-design/icons-vue';
 import axios from 'axios';
 
 export default {
@@ -138,9 +147,9 @@ export default {
 
     // Define actions for list items
     const actions = [
-      { icon: StarOutlined, text: '156' },
-      { icon: LikeOutlined, text: '156' },
-      { icon: MessageOutlined, text: '2' },
+      {icon: StarOutlined, text: '156'},
+      {icon: LikeOutlined, text: '156'},
+      {icon: MessageOutlined, text: '2'},
     ];
 
     // Return reactive variables and imported icons
