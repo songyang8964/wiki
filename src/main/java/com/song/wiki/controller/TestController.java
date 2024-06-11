@@ -2,7 +2,7 @@ package com.song.wiki.controller;
 
 import com.song.wiki.domain.Test;
 import com.song.wiki.service.TestService;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

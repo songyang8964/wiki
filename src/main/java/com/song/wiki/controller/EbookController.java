@@ -5,7 +5,7 @@ import com.song.wiki.request.EbookReq;
 import com.song.wiki.response.EbookResp;
 import com.song.wiki.service.EbookService;
 import com.song.wiki.utils.Result;
-import jakarta.annotation.Resource;
+import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

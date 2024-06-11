@@ -11,7 +11,7 @@
           <a-sub-menu key="sub1">
             <template #title>
               <span>
-                <user-outlined />
+                <user-outlined/>
                 subnav 1
               </span>
             </template>
@@ -23,7 +23,7 @@
           <a-sub-menu key="sub2">
             <template #title>
               <span>
-                <laptop-outlined />
+                <laptop-outlined/>
                 subnav 2
               </span>
             </template>
@@ -35,7 +35,7 @@
           <a-sub-menu key="sub3">
             <template #title>
               <span>
-                <notification-outlined />
+                <notification-outlined/>
                 subnav 1111111111
               </span>
             </template>
@@ -47,16 +47,42 @@
         </a-menu>
       </a-layout-sider>
       <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
-        Content
+        <pre>
+          {{ ebooks }}
+        </pre>
       </a-layout-content>
     </a-layout>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue';
+import {ref} from 'vue';
+import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons-vue';
+import {defineComponent} from 'vue';
+import axios from 'axios';
 
-const selectedKeys2 = ref<string[]>(['1']);
-const openKeys = ref<string[]>(['sub1']);
+
+//后端的电子书列表不断更新的,这里前端需要用响应式的数据(ref)
+// ref对应的赋值是.value
+
+
+export default defineComponent({
+  name: 'Home',
+  serup() {
+    console.log('setup');
+    const ebooks = ref();
+    onMounted(() => {
+      console.log('onMounted');
+      axios.get("GET http://localhost:8080/ebook/list?name=Spring").then((response) => {
+        const data = response.data;
+        ebboks.value = data.content;
+        console.log(response);
+      });
+    });
+    return {
+      ebooks,
+    };
+  },
+});
+
 </script>
