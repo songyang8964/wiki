@@ -117,7 +117,8 @@ export default {
 
     // Fetch data from the backend when the component is mounted
     onMounted(() => {
-      axios.get('http://localhost:8080/ebook/list')
+      console.log('Fetching ebook list...8964');
+      axios.get('/ebook/list')
           .then((response) => {
             const data = response.data;
             if (data && data.content) {
