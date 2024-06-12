@@ -7,6 +7,7 @@ import com.song.wiki.service.EbookService;
 import com.song.wiki.utils.Result;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,10 @@ public class EbookController {
         result.setContent(list);
         return result;
     }
+//    @PostMapping("/save")
+//    public Result save(EbookReq req) {
+//        Result result = new Result<>();
+//        ebookService.save(req);
+//        return result;
+//    }
 }
