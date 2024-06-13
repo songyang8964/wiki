@@ -2,6 +2,7 @@ package com.song.wiki.service;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.extra.spring.SpringUtil;
+import com.github.pagehelper.PageHelper;
 import com.song.wiki.domain.Ebook;
 import com.song.wiki.domain.EbookExample;
 import com.song.wiki.mapper.EbookMapper;
@@ -26,11 +27,14 @@ public class EbookService {
     // 如果程序代码没有错但是编译报错,那就是maven 的问题
     // if the program code is correct but the compilation error is reported, it is a problem with maven
     public List<EbookResp> list(EbookReq req) {
+
         EbookExample ebookExample = new EbookExample();
         EbookExample.Criteria criteria = ebookExample.createCriteria();
         if (!ObjectUtils.isEmpty(req.getName())) {
             criteria.andNameLike("%" + req.getName() + "%");
         }
+        //  page query
+        PageHelper.startPage(1,3);
         List<Ebook> ebookList = ebookMapper.selectByExample(ebookExample);
 
         List<EbookResp> respList = new ArrayList<>();

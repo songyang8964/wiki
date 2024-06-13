@@ -11,4 +11,7 @@
 #GET http://localhost:8080/test/list
 
 ###
-GET http://localhost:8080/ebook/list?name=Spring
+#GET http://localhost:8080/ebook/list?name=Spring
+
+###
+GET http://localhost:8080/ebook/list
