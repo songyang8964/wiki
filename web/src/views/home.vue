@@ -113,13 +113,10 @@ export default {
     // Fetch data from the backend when the component is mounted
     onMounted(() => {
       // console.log('Fetching ebook list...8964');
-      axios.get('/ebook/list')
-          .then((response) => {
+      axios.get('/ebook/list', {params: {page: 1, pageSize: 1000}})
+          .then(response => {
             const data = response.data;
-            ebooks.value = data.content;
-          })
-          .catch((error) => {
-            console.error('Error fetching ebook list:', error);
+            ebooks.value = data.content.list;
           });
     });
 

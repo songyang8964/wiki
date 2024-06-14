@@ -1,20 +1,16 @@
 package com.song.wiki.controller;
 
-import com.song.wiki.domain.Ebook;
-import com.song.wiki.request.EbookReq;
-import com.song.wiki.response.EbookResp;
+import com.song.wiki.request.EbookQueryReq;
+import com.song.wiki.request.EbookSaveReq;
+import com.song.wiki.response.EbookQueryResp;
 import com.song.wiki.response.PageResp;
 import com.song.wiki.service.EbookService;
 import com.song.wiki.utils.Result;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/ebook")
@@ -24,17 +20,30 @@ public class EbookController {
     private EbookService ebookService;
 
     @GetMapping("/list")
-    public Result list(EbookReq req) {
-        Result<PageResp<EbookResp>> result = new Result<>();
-        PageResp<EbookResp> list = ebookService.list(req);
+    public Result list(@Valid EbookQueryReq req) {
+        Result<PageResp<EbookQueryResp>> result = new Result<>();
+        PageResp<EbookQueryResp> list = ebookService.list(req);
         //return result.setContent(list);
         result.setContent(list);
         return result;
     }
-//    @PostMapping("/save")
-//    public Result save(EbookReq req) {
-//        Result result = new Result<>();
-//        ebookService.save(req);
-//        return result;
-//    }
+
+    //for save and udate methods, we use @PostMapping
+    // why should I modify the query parameter to save? because the request data are different
+    // postmapping 是用json方式的提交 只有加上@RequestBody,后端才能接收到数据
+    // postmapping is used for json submission, only with @RequestBody can the backend receive the data
+    // if postmapping used form submission, the backend can receive the data without @annotation
+    @PostMapping("/save")
+    public Result save(@Valid @RequestBody EbookSaveReq req) {
+        Result result = new Result<>();
+        ebookService.save(req);
+        return result;
+    }
+
+    @DeleteMapping(value = "/delete/{id}")
+    public Result delete(@PathVariable Long id) {
+        Result result = new Result<>();
+        ebookService.delete(id);
+        return result;
+    }
 }

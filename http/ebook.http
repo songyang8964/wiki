@@ -1,2 +1,2 @@
-GET http://localhost:8080/ebook/list?Page=1&Size=4
+GET http://localhost:8080/ebook/list?Page=1&Size=1001
 
