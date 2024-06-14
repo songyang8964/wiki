@@ -72,11 +72,6 @@
                   {{ text }}
                 </span>
               </template>
-              <!-- Extra content slot for list item -->
-              <template #extra>
-                <!-- Uncomment and add image if needed -->
-                <!-- <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" /> -->
-              </template>
               <!-- Metadata slot for list item meta information -->
               <a-list-item-meta :description="item.description">
                 <template #title>
