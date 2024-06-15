@@ -22,9 +22,9 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://springboot-vue.c9uu4mc8a0kk.eu-north-1.rds.amazonaws.com:3306/wiki"
-                        userId="admin"
-                        password="YS20020210">
+                        connectionURL="jdbc:mysql://localhost:3306/wiki?serverTimezone=Europe/London"
+                        userId="root"
+                        password="1234">
         </jdbcConnection>
 
         <!-- domain类的位置 -->
@@ -40,9 +40,10 @@
                              targetPackage="com.song.wiki.mapper"
                              type="XMLMAPPER"/>
 
-        <table tableName="demo" domainObjectName="Demo"/>
+<!--        <table tableName="demo" domainObjectName="Demo"/>-->
 
-        <table tableName="ebook"/>
+<!--        <table tableName="ebook"/>-->
 
+        <table tableName="category"/>
     </context>
 </generatorConfiguration>
