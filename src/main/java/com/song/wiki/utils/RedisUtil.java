@@ -2,6 +2,7 @@ package com.song.wiki.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,7 @@ public class RedisUtil {
     /**
      * true：不存在，放一个KEY
      * false：已存在
+     *
      * @param key
      * @param second
      * @return
