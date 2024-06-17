@@ -14,7 +14,12 @@
       </a-menu-item>
       <a-menu-item key="/admin/ebook">
         <router-link to="/admin/ebook">
-          ebook-admin
+          ebook-management
+        </router-link>
+      </a-menu-item>
+      <a-menu-item key="/admin/category">
+        <router-link to="/admin/category">
+          category-management
         </router-link>
       </a-menu-item>
       <a-menu-item key="/about">
@@ -22,6 +27,7 @@
           About us
         </router-link>
       </a-menu-item>
+
 
     </a-menu>
   </a-layout-header>

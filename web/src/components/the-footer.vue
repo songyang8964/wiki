@@ -1,6 +1,6 @@
 <template>
   <a-layout-footer style="text-align: center">
-    Hello world, welcome to my new app!
+    Hello world, welcome to song yang's new app!
   </a-layout-footer>
 </template>
 
