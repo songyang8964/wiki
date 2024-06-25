@@ -118,6 +118,8 @@ import {Tool} from "@/util/tool";
 import {Doc, DocQueryForm} from "@/models";
 import {useRoute} from "vue-router";
 import E from 'wangeditor';
+import i18next from "i18next";
+
 
 
 export default defineComponent({
@@ -147,17 +149,7 @@ export default defineComponent({
       }
     ];
 
-    /**
-     * 一级文档树，children属性就是二级文档
-     * [{
-     *   id: "",
-     *   name: "",
-     *   children: [{
-     *     id: "",
-     *     name: "",
-     *   }]
-     * }]
-     */
+
     const level1 = ref(); // 一级文档树，children属性就是二级文档
     level1.value = [];
 
@@ -373,6 +365,9 @@ export default defineComponent({
       handleQueryDocs();
       textEditor = new E('#content');
       textEditor.config.zIndex = 0;
+      // 设置语言为英文
+      textEditor.i18next = i18next;
+      textEditor.config.lang = 'en';
       textEditor.create();
     });
 
