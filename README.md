@@ -1,5 +1,5 @@
 ### Frontend-Backend Separated E-Book System
-**Repository:** [github.com/song/Wiki](https://github.com/song/Wiki)  
+**Repository:** [github.com/songyang8964/Wiki](https://github.com/songyang8964/Wiki)  
 **Technology Stack:** 
 - Spring Boot
 - Vue.js
